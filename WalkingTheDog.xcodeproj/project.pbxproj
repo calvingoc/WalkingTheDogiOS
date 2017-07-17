@@ -14,6 +14,16 @@
 		3601620C1F19046500B1B2A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3601620A1F19046500B1B2A8 /* LaunchScreen.storyboard */; };
 		360162171F19046600B1B2A8 /* WalkingTheDogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360162161F19046600B1B2A8 /* WalkingTheDogTests.swift */; };
 		360162221F19046600B1B2A8 /* WalkingTheDogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360162211F19046600B1B2A8 /* WalkingTheDogUITests.swift */; };
+		360162301F19047D00B1B2A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3601622F1F19047D00B1B2A8 /* GoogleService-Info.plist */; };
+		36088A351F1D194200D53B19 /* SQLHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36088A341F1D194200D53B19 /* SQLHelper.swift */; };
+		364925001F1CFE0800DE724D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 364924FF1F1CFE0800DE724D /* SWRevealViewController.m */; };
+		364925021F1D0A5700DE724D /* AddEditDog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364925011F1D0A5700DE724D /* AddEditDog.swift */; };
+		364925041F1D125100DE724D /* UserWalkingTheDogSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364925031F1D125100DE724D /* UserWalkingTheDogSettings.swift */; };
+		36B394061F1D1DC1007494F0 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B394051F1D1DC1007494F0 /* SQLite.framework */; };
+		36B394081F1D1DD1007494F0 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 36B394051F1D1DC1007494F0 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3F0642BD02F912889A6D09B5 /* Pods_WalkingTheDog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD5FCEA6274611D54E9E422 /* Pods_WalkingTheDog.framework */; };
+		592DD9F4E502A988B7AFC614 /* Pods_WalkingTheDogUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30A4D84CA63E6456CC03DF0F /* Pods_WalkingTheDogUITests.framework */; };
+		CC1EB77125E741F8516AF66E /* Pods_WalkingTheDogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A50A47344B0D001585B2565 /* Pods_WalkingTheDogTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +43,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		36B394091F1D1DD1007494F0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				36B394081F1D1DD1007494F0 /* SQLite.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		225C58A7CC900ACC3ED49056 /* Pods-WalkingTheDogUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkingTheDogUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkingTheDogUITests/Pods-WalkingTheDogUITests.release.xcconfig"; sourceTree = "<group>"; };
+		24A543DF6766AE009268924B /* Pods-WalkingTheDogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkingTheDogUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkingTheDogUITests/Pods-WalkingTheDogUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		30A4D84CA63E6456CC03DF0F /* Pods_WalkingTheDogUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkingTheDogUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		360161FE1F19046500B1B2A8 /* WalkingTheDog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkingTheDog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		360162011F19046500B1B2A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		360162031F19046500B1B2A8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +74,20 @@
 		3601621D1F19046600B1B2A8 /* WalkingTheDogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkingTheDogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		360162211F19046600B1B2A8 /* WalkingTheDogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingTheDogUITests.swift; sourceTree = "<group>"; };
 		360162231F19046600B1B2A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3601622F1F19047D00B1B2A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		36088A341F1D194200D53B19 /* SQLHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLHelper.swift; sourceTree = "<group>"; };
+		364924FD1F1CFE0700DE724D /* WalkingTheDog-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WalkingTheDog-Bridging-Header.h"; sourceTree = "<group>"; };
+		364924FE1F1CFE0800DE724D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		364924FF1F1CFE0800DE724D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		364925011F1D0A5700DE724D /* AddEditDog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditDog.swift; sourceTree = "<group>"; };
+		364925031F1D125100DE724D /* UserWalkingTheDogSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserWalkingTheDogSettings.swift; sourceTree = "<group>"; };
+		36B394051F1D1DC1007494F0 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = "../../../../Library/Developer/Xcode/DerivedData/WalkingTheDog-dtbdwcufjczsubcwtjvfxlrcxulo/Build/Products/Debug-iphonesimulator/SQLite.swift/SQLite.framework"; sourceTree = "<group>"; };
+		3A50A47344B0D001585B2565 /* Pods_WalkingTheDogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkingTheDogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F2745F2FB53018449F2E073 /* Pods-WalkingTheDog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkingTheDog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkingTheDog/Pods-WalkingTheDog.debug.xcconfig"; sourceTree = "<group>"; };
+		6FD5FCEA6274611D54E9E422 /* Pods_WalkingTheDog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkingTheDog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9959A679CDC2C1496A3D115B /* Pods-WalkingTheDogTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkingTheDogTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkingTheDogTests/Pods-WalkingTheDogTests.release.xcconfig"; sourceTree = "<group>"; };
+		C8A5D8B2AE7EE04D41FD2335 /* Pods-WalkingTheDog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkingTheDog.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkingTheDog/Pods-WalkingTheDog.release.xcconfig"; sourceTree = "<group>"; };
+		EBABBC013EB578FD0CB7C60D /* Pods-WalkingTheDogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkingTheDogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkingTheDogTests/Pods-WalkingTheDogTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +95,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36B394061F1D1DC1007494F0 /* SQLite.framework in Frameworks */,
+				3F0642BD02F912889A6D09B5 /* Pods_WalkingTheDog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC1EB77125E741F8516AF66E /* Pods_WalkingTheDogTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				592DD9F4E502A988B7AFC614 /* Pods_WalkingTheDogUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +126,8 @@
 				360162151F19046600B1B2A8 /* WalkingTheDogTests */,
 				360162201F19046600B1B2A8 /* WalkingTheDogUITests */,
 				360161FF1F19046500B1B2A8 /* Products */,
+				3F0F911141B95AC1FBAFE4B2 /* Pods */,
+				84E929B241CAF3E0580EF10A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,9 +147,16 @@
 				360162011F19046500B1B2A8 /* AppDelegate.swift */,
 				360162031F19046500B1B2A8 /* ViewController.swift */,
 				360162051F19046500B1B2A8 /* Main.storyboard */,
+				364925011F1D0A5700DE724D /* AddEditDog.swift */,
 				360162081F19046500B1B2A8 /* Assets.xcassets */,
 				3601620A1F19046500B1B2A8 /* LaunchScreen.storyboard */,
 				3601620D1F19046500B1B2A8 /* Info.plist */,
+				364924FE1F1CFE0800DE724D /* SWRevealViewController.h */,
+				364924FF1F1CFE0800DE724D /* SWRevealViewController.m */,
+				3601622F1F19047D00B1B2A8 /* GoogleService-Info.plist */,
+				364924FD1F1CFE0700DE724D /* WalkingTheDog-Bridging-Header.h */,
+				364925031F1D125100DE724D /* UserWalkingTheDogSettings.swift */,
+				36088A341F1D194200D53B19 /* SQLHelper.swift */,
 			);
 			path = WalkingTheDog;
 			sourceTree = "<group>";
@@ -125,6 +179,30 @@
 			path = WalkingTheDogUITests;
 			sourceTree = "<group>";
 		};
+		3F0F911141B95AC1FBAFE4B2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3F2745F2FB53018449F2E073 /* Pods-WalkingTheDog.debug.xcconfig */,
+				C8A5D8B2AE7EE04D41FD2335 /* Pods-WalkingTheDog.release.xcconfig */,
+				EBABBC013EB578FD0CB7C60D /* Pods-WalkingTheDogTests.debug.xcconfig */,
+				9959A679CDC2C1496A3D115B /* Pods-WalkingTheDogTests.release.xcconfig */,
+				24A543DF6766AE009268924B /* Pods-WalkingTheDogUITests.debug.xcconfig */,
+				225C58A7CC900ACC3ED49056 /* Pods-WalkingTheDogUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		84E929B241CAF3E0580EF10A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				36B394051F1D1DC1007494F0 /* SQLite.framework */,
+				6FD5FCEA6274611D54E9E422 /* Pods_WalkingTheDog.framework */,
+				3A50A47344B0D001585B2565 /* Pods_WalkingTheDogTests.framework */,
+				30A4D84CA63E6456CC03DF0F /* Pods_WalkingTheDogUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +210,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 360162261F19046600B1B2A8 /* Build configuration list for PBXNativeTarget "WalkingTheDog" */;
 			buildPhases = (
+				853D7055CB395402F2EC334F /* [CP] Check Pods Manifest.lock */,
 				360161FA1F19046500B1B2A8 /* Sources */,
 				360161FB1F19046500B1B2A8 /* Frameworks */,
 				360161FC1F19046500B1B2A8 /* Resources */,
+				4F7C02BB3A4B8B1C42E8E004 /* [CP] Embed Pods Frameworks */,
+				C503D533628C0ACC6871287E /* [CP] Copy Pods Resources */,
+				36B394091F1D1DD1007494F0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -149,9 +231,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 360162291F19046600B1B2A8 /* Build configuration list for PBXNativeTarget "WalkingTheDogTests" */;
 			buildPhases = (
+				EBBC8A0C7A384081CB660EF8 /* [CP] Check Pods Manifest.lock */,
 				3601620E1F19046600B1B2A8 /* Sources */,
 				3601620F1F19046600B1B2A8 /* Frameworks */,
 				360162101F19046600B1B2A8 /* Resources */,
+				09906E0E8C7BE1BFD9E2F660 /* [CP] Embed Pods Frameworks */,
+				3755FF13D69D03D9A7900159 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +252,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3601622C1F19046600B1B2A8 /* Build configuration list for PBXNativeTarget "WalkingTheDogUITests" */;
 			buildPhases = (
+				0EE524F7FED94696F84C6127 /* [CP] Check Pods Manifest.lock */,
 				360162191F19046600B1B2A8 /* Sources */,
 				3601621A1F19046600B1B2A8 /* Frameworks */,
 				3601621B1F19046600B1B2A8 /* Resources */,
+				FBC1B1949726553E01F5E507 /* [CP] Embed Pods Frameworks */,
+				AF46A6268D82B7F74781415A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -193,6 +281,7 @@
 				TargetAttributes = {
 					360161FD1F19046500B1B2A8 = {
 						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					360162111F19046600B1B2A8 = {
@@ -233,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3601620C1F19046500B1B2A8 /* LaunchScreen.storyboard in Resources */,
+				360162301F19047D00B1B2A8 /* GoogleService-Info.plist in Resources */,
 				360162091F19046500B1B2A8 /* Assets.xcassets in Resources */,
 				360162071F19046500B1B2A8 /* Main.storyboard in Resources */,
 			);
@@ -254,13 +344,155 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		09906E0E8C7BE1BFD9E2F660 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkingTheDogTests/Pods-WalkingTheDogTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0EE524F7FED94696F84C6127 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3755FF13D69D03D9A7900159 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkingTheDogTests/Pods-WalkingTheDogTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4F7C02BB3A4B8B1C42E8E004 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkingTheDog/Pods-WalkingTheDog-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		853D7055CB395402F2EC334F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AF46A6268D82B7F74781415A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkingTheDogUITests/Pods-WalkingTheDogUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C503D533628C0ACC6871287E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkingTheDog/Pods-WalkingTheDog-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBBC8A0C7A384081CB660EF8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FBC1B1949726553E01F5E507 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkingTheDogUITests/Pods-WalkingTheDogUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		360161FA1F19046500B1B2A8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				364925021F1D0A5700DE724D /* AddEditDog.swift in Sources */,
 				360162041F19046500B1B2A8 /* ViewController.swift in Sources */,
+				36088A351F1D194200D53B19 /* SQLHelper.swift in Sources */,
 				360162021F19046500B1B2A8 /* AppDelegate.swift in Sources */,
+				364925041F1D125100DE724D /* UserWalkingTheDogSettings.swift in Sources */,
+				364925001F1CFE0800DE724D /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,30 +644,38 @@
 		};
 		360162271F19046600B1B2A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F2745F2FB53018449F2E073 /* Pods-WalkingTheDog.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = WalkingTheDog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cagocapps.online.WalkingTheDog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WalkingTheDog/WalkingTheDog-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		360162281F19046600B1B2A8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8A5D8B2AE7EE04D41FD2335 /* Pods-WalkingTheDog.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = WalkingTheDog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cagocapps.online.WalkingTheDog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WalkingTheDog/WalkingTheDog-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		3601622A1F19046600B1B2A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBABBC013EB578FD0CB7C60D /* Pods-WalkingTheDogTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -450,6 +690,7 @@
 		};
 		3601622B1F19046600B1B2A8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9959A679CDC2C1496A3D115B /* Pods-WalkingTheDogTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -464,6 +705,7 @@
 		};
 		3601622D1F19046600B1B2A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24A543DF6766AE009268924B /* Pods-WalkingTheDogUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = WalkingTheDogUITests/Info.plist;
@@ -477,6 +719,7 @@
 		};
 		3601622E1F19046600B1B2A8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 225C58A7CC900ACC3ED49056 /* Pods-WalkingTheDogUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = WalkingTheDogUITests/Info.plist;
@@ -507,6 +750,7 @@
 				360162281F19046600B1B2A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		360162291F19046600B1B2A8 /* Build configuration list for PBXNativeTarget "WalkingTheDogTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +759,7 @@
 				3601622B1F19046600B1B2A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3601622C1F19046600B1B2A8 /* Build configuration list for PBXNativeTarget "WalkingTheDogUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +768,7 @@
 				3601622E1F19046600B1B2A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

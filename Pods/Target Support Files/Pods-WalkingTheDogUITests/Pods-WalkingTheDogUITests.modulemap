@@ -1,0 +1,6 @@
+framework module Pods_WalkingTheDogUITests {
+  umbrella header "Pods-WalkingTheDogUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
