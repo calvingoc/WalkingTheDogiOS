@@ -19,6 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         GADMobileAds.configure(withApplicationID: "ca-app-pub-9578859157437430~1781136107")
+        if let userSettings = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? UserWalkingTheDogSettings{
+            userSettings.currentDog = userSettings.defaultDog
+            userSettings.dogsOnWalk = userSettings.defDogsOnWalk
+        }
+        let ref = Database.database().reference()
+        SQLHelper.sharedInstance.setListeners(ref: ref)
         // Override point for customization after application launch.
         return true
     }
@@ -43,6 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    var filePath: String{
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        return (url!.appendingPathComponent("Data").path)
     }
 
 
