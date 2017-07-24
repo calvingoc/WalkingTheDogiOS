@@ -48,8 +48,8 @@ class ImportDog: UIViewController, UINavigationControllerDelegate {
     @IBAction func createNewDog(_ sender: Any) {
         if (mUserSettings != nil){
             mUserSettings.currentDog = -1
+            NSKeyedArchiver.archiveRootObject(mUserSettings, toFile: filePath)
         }
-        NSKeyedArchiver.archiveRootObject(mUserSettings, toFile: filePath)
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "New Dog") as! AddEditDog

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SQLite
 
 class CellData{
     var id: Int64
@@ -18,8 +19,11 @@ class CellData{
     var curDist: Double
     var timeGoal: Double
     var curTime: Double
+    var streak: Double
+    var dogRow: Row?
+    var onWalk: Bool
     
-    init(inID: Int64, inName: String, inImage: UIImage, inWalkGoal: Double, inCurWalk: Double, inDistGoal: Double, inCurDist: Double, inTimeGoal: Double, inCurTime: Double){
+    init(inID: Int64, inName: String, inImage: UIImage, inWalkGoal: Double, inCurWalk: Double, inDistGoal: Double, inCurDist: Double, inTimeGoal: Double, inCurTime: Double, inStreak: Double, inRow: Row?, inOnWalk: Bool){
         id = inID
         name = inName
         image = inImage
@@ -29,6 +33,10 @@ class CellData{
         curDist = inCurDist
         timeGoal = inTimeGoal
         curTime = inCurTime
+        streak = inStreak
+        dogRow = inRow
+        onWalk = inOnWalk
+        
     }
     
     func getID() -> Int64 {
@@ -65,6 +73,9 @@ class CellData{
     
     func getCurTime() -> Double {
         return curTime
+    }
+    func getStreak() -> Double {
+        return streak
     }
     
 }

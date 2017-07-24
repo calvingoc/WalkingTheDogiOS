@@ -64,6 +64,7 @@ class ViewController: UIViewController, GADBannerViewDelegate {
         startWalkButton.imageEdgeInsets = UIEdgeInsets(top:10, left:10, bottom: 10, right: 10)
         startWalkButton.layer.cornerRadius = startWalkButton.bounds.size.width/2
         startWalkButton.layer.zPosition = 5
+        startWalkButton.superview?.bringSubview(toFront: startWalkButton)
         
         editGoals.layer.cornerRadius = 5
         
@@ -164,7 +165,7 @@ class ViewController: UIViewController, GADBannerViewDelegate {
                 secondsString = "0" + secondsString
             }
             lifeTime.text = "\(hours):" + minutesString + secondsString
-            lifeDistance.text = "\(dogRow!.get(SQLHelper.sharedInstance.totDist))"
+            lifeDistance.text = "\(dogRow!.get(SQLHelper.sharedInstance.totDist).roundTo(places: 2))"
             bestWalksDay.text = "\(Int(dogRow!.get(SQLHelper.sharedInstance.bestWalks)))"
             hours = Int(dogRow!.get(SQLHelper.sharedInstance.bestTime) / 60)
             minutes = Int(dogRow!.get(SQLHelper.sharedInstance.bestTime).truncatingRemainder(dividingBy: 60))
@@ -186,8 +187,8 @@ class ViewController: UIViewController, GADBannerViewDelegate {
                 secondsString = "0" + secondsString
             }
             bestTimeDay.text = "\(hours):" + minutesString + secondsString
-            bestDistanceDay.text = "\(dogRow!.get(SQLHelper.sharedInstance.bestDistDay))"
-            bestDistanceWalk.text = "\(dogRow!.get(SQLHelper.sharedInstance.bestDist))"
+            bestDistanceDay.text = "\(dogRow!.get(SQLHelper.sharedInstance.bestDistDay).roundTo(places: 2))"
+            bestDistanceWalk.text = "\(dogRow!.get(SQLHelper.sharedInstance.bestDist).roundTo(places: 2))"
             bestStreak.text = "\(dogRow!.get(SQLHelper.sharedInstance.bestStreak))"
             if dogRow!.get(SQLHelper.sharedInstance.totWalks) != 0 {
                 hours = Int(dogRow!.get(SQLHelper.sharedInstance.totTime) / dogRow!.get(SQLHelper.sharedInstance.totWalks) / 60)
@@ -200,7 +201,7 @@ class ViewController: UIViewController, GADBannerViewDelegate {
                     secondsString = "0" + secondsString
                 }
                 aveTimeWalk.text = "\(hours):" + minutesString + secondsString
-                let distWalk = dogRow!.get(SQLHelper.sharedInstance.totDist) / dogRow!.get(SQLHelper.sharedInstance.totWalks)
+                let distWalk = (dogRow!.get(SQLHelper.sharedInstance.totDist) / dogRow!.get(SQLHelper.sharedInstance.totWalks)).roundTo(places: 2)
                 aveMilesWalk.text = "\(distWalk)"
             } else {
                 aveTimeWalk.text = "0"
@@ -217,7 +218,7 @@ class ViewController: UIViewController, GADBannerViewDelegate {
                     secondsString = "0" + secondsString
                 }
                 aveTimeDay.text = "\(hours):" + minutesString + secondsString
-                let distDay = dogRow!.get(SQLHelper.sharedInstance.totDist) / dogRow!.get(SQLHelper.sharedInstance.totDays)
+                let distDay = (dogRow!.get(SQLHelper.sharedInstance.totDist) / dogRow!.get(SQLHelper.sharedInstance.totDays)).roundTo(places: 2)
                 aveMilesDay.text = "\(distDay)"
                 let walksDay = dogRow!.get(SQLHelper.sharedInstance.totWalks) / dogRow!.get(SQLHelper.sharedInstance.totDays)
                 aveWalksDay.text = "\(walksDay)"
@@ -228,7 +229,8 @@ class ViewController: UIViewController, GADBannerViewDelegate {
                 aveWalksDay.text = "0"
             }
             if dogRow!.get(SQLHelper.sharedInstance.totTime) != 0 {
-                let mph = dogRow!.get(SQLHelper.sharedInstance.totDist) / dogRow!.get(SQLHelper.sharedInstance.totTime) / 60
+                var mph = dogRow!.get(SQLHelper.sharedInstance.totDist) / dogRow!.get(SQLHelper.sharedInstance.totTime) / 60
+                mph = mph.roundTo(places: 2)
                 aveMilesHour.text = "\(mph)"
             }
             else {
@@ -239,12 +241,23 @@ class ViewController: UIViewController, GADBannerViewDelegate {
             
         }
     }
+    //@IBAction func startWalk(_ sender: Any) {
+    //    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+    //    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "TrackWalk") as! TrackWalk
+    //    self.navigationController?.pushViewController(nextViewController, animated: true)
+    //}
     
     func setUpListener()  {
         let dog = SQLHelper.sharedInstance.findDog(dogID: (mUserSettings?.currentDog)!)
         let ref = Database.database().reference()
-        ref.child((dog?.get(SQLHelper.sharedInstance.onlineID))!).observe(DataEventType.value, with: { (snapshot) in
-            self.setUpPage()}) { (error) in print(error.localizedDescription)}
+        if ((dog?.get(SQLHelper.sharedInstance.onlineID)) != "" && (dog?.get(SQLHelper.sharedInstance.onlineID) != nil)){
+            ref.child((dog?.get(SQLHelper.sharedInstance.onlineID))!).observe(DataEventType.value, with: { (snapshot) in
+                self.setUpPage()}) { (error) in print(error.localizedDescription)}
+        }
+        else {
+            setUpPage()
+        }
     }
     
     @IBAction func editDog(_ sender: Any) {
@@ -262,6 +275,15 @@ class ViewController: UIViewController, GADBannerViewDelegate {
     }
     
     
+    
+    
 
+}
+
+extension Double {
+    func roundTo(places: Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
 }
 

@@ -152,13 +152,13 @@ class AddEditDog: UIViewController, UINavigationControllerDelegate, UIImagePicke
     }
     
     @IBAction func addUpdate(_ sender: Any) {
-        if (dogName.text != "" && walksEditText.text != "" && timeEditText.text != "" && distanceEditText.text != ""){
+        if (dogName.text != "" && walksEditText.text != "" && timeEditText.text != "" && distanceEditText.text != "" && dogName.text?.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) == nil){
             if (newDog){
                 let id = SQLHelper.sharedInstance.addDog(newDogName: dogName.text!, nWalksGoal: NSString(string: walksEditText.text!).doubleValue, nTimeGoal: NSString(string: timeEditText.text!).doubleValue, distanceGoal: NSString(string: distanceEditText.text!).doubleValue, picturePath: "WalkingTheDog", shareID: onlineID)
                 ImageStore().saveImage(image: dogPicture.image!, key: "WalkingTheDog\(id ?? 1)")
                 print("imageKey 1 WalkingTheDog\(id ?? 1)")
                 if (mUserSettings == nil){
-                    let userData = UserWalkingTheDogSettings(defaultDog: id!, currentDog: id!, dogsOnWalk: "1", defDogsOnWalk: "1")
+                    let userData = UserWalkingTheDogSettings(defaultDog: id!, currentDog: id!, dogsOnWalk: ",1", defDogsOnWalk: ",1")
                     mUserSettings = userData
                     mUserSettings.currentDog = id!
                     mUserSettings.defaultDog = id!

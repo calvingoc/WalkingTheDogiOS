@@ -15,11 +15,17 @@ public class UserWalkingTheDogSettings: NSObject, NSCoding{
         static let currentDog = "currentDog"
         static let dogsOnWalk = "dogsOnWalk"
         static let defDogsOnWalk = "defDogsOnWalk"
+        static let lastWalkTime = "lastWalkTime"
+        static let lastWalkDist = "lastWalkDist"
+        static let lastTimeSynced = "lastTimeSynced"
     }
     private var _defaultDog: Int64?
     private var _currentDog: Int64?
     private var _dogsOnWalk: String?
     private var _defDogsOnWalk: String?
+    public var _lastWalkTime: Double?
+    public var _lastWalkDist: Double?
+    public var _lastTimeSynced: Date?
     
     override public init() {}
     
@@ -28,6 +34,7 @@ public class UserWalkingTheDogSettings: NSObject, NSCoding{
         self._currentDog = currentDog
         self._dogsOnWalk = dogsOnWalk
         self._defDogsOnWalk = defDogsOnWalk
+        self._lastTimeSynced = Date()
     }
     
     
@@ -44,6 +51,18 @@ public class UserWalkingTheDogSettings: NSObject, NSCoding{
         if let defDogsOnWalkObject = aDecoder.decodeObject(forKey: Keys.defDogsOnWalk) as? String {
             _defDogsOnWalk = defDogsOnWalkObject
         }
+        
+        if let lastWalkTimeObject = aDecoder.decodeObject(forKey: Keys.lastWalkTime) as? Double {
+            _lastWalkTime = lastWalkTimeObject
+        }
+        
+        if let lastWalkDistObject = aDecoder.decodeObject(forKey: Keys.lastWalkDist) as? Double {
+            _lastWalkDist = lastWalkDistObject
+        }
+        
+        if let lastTimeSyncedObject = aDecoder.decodeObject(forKey: Keys.lastTimeSynced) as? Date {
+            _lastTimeSynced = lastTimeSyncedObject
+        }
     }
     
     public func encode(with aCoder: NSCoder) {
@@ -51,6 +70,9 @@ public class UserWalkingTheDogSettings: NSObject, NSCoding{
         aCoder.encode(_currentDog, forKey: Keys.currentDog)
         aCoder.encode(_dogsOnWalk, forKey: Keys.dogsOnWalk)
         aCoder.encode(_defDogsOnWalk, forKey: Keys.defDogsOnWalk)
+        aCoder.encode(_lastWalkTime, forKey: Keys.lastWalkTime)
+        aCoder.encode(_lastWalkDist, forKey: Keys.lastWalkDist)
+        aCoder.encode(_lastTimeSynced, forKey: Keys.lastTimeSynced)
     }
     
     var defaultDog: Int64{
@@ -88,6 +110,33 @@ public class UserWalkingTheDogSettings: NSObject, NSCoding{
             _defDogsOnWalk = newValue
         }
     }
+    
+    var lastWalkTime: Double {
+        get {
+            return _lastWalkTime!
+        }
+        set {
+            _lastWalkTime = newValue
+        }
+    }
+    
+    var lastWalkDist: Double {
+        get {
+            return _lastWalkDist!
+        }
+        set {
+            _lastWalkDist = newValue
+        }
+    }
+    var lastTimeSynced: Date {
+        get {
+            return _lastTimeSynced!
+        }
+        set {
+            _lastTimeSynced = newValue
+        }
+    }
+    
     
     
 }

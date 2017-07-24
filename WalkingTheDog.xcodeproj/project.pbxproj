@@ -27,6 +27,7 @@
 		36B394061F1D1DC1007494F0 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B394051F1D1DC1007494F0 /* SQLite.framework */; };
 		36B394081F1D1DD1007494F0 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 36B394051F1D1DC1007494F0 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		36B3940B1F1E5870007494F0 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B3940A1F1E5870007494F0 /* ImageStore.swift */; };
+		36DE36D61F265907002F4134 /* WalkSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DE36D51F265907002F4134 /* WalkSummary.swift */; };
 		3F0642BD02F912889A6D09B5 /* Pods_WalkingTheDog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD5FCEA6274611D54E9E422 /* Pods_WalkingTheDog.framework */; };
 		592DD9F4E502A988B7AFC614 /* Pods_WalkingTheDogUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30A4D84CA63E6456CC03DF0F /* Pods_WalkingTheDogUITests.framework */; };
 		CC1EB77125E741F8516AF66E /* Pods_WalkingTheDogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A50A47344B0D001585B2565 /* Pods_WalkingTheDogTests.framework */; };
@@ -94,6 +95,7 @@
 		36888C561F22989C007218FC /* TrackWalk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackWalk.swift; sourceTree = "<group>"; };
 		36B394051F1D1DC1007494F0 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = "../../../../Library/Developer/Xcode/DerivedData/WalkingTheDog-dtbdwcufjczsubcwtjvfxlrcxulo/Build/Products/Debug-iphonesimulator/SQLite.swift/SQLite.framework"; sourceTree = "<group>"; };
 		36B3940A1F1E5870007494F0 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
+		36DE36D51F265907002F4134 /* WalkSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkSummary.swift; sourceTree = "<group>"; };
 		3A50A47344B0D001585B2565 /* Pods_WalkingTheDogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkingTheDogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F2745F2FB53018449F2E073 /* Pods-WalkingTheDog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkingTheDog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkingTheDog/Pods-WalkingTheDog.debug.xcconfig"; sourceTree = "<group>"; };
 		6FD5FCEA6274611D54E9E422 /* Pods_WalkingTheDog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkingTheDog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +177,7 @@
 				36888C501F224C48007218FC /* CellData.swift */,
 				36888C541F225DA3007218FC /* Achievements.swift */,
 				36888C561F22989C007218FC /* TrackWalk.swift */,
+				36DE36D51F265907002F4134 /* WalkSummary.swift */,
 			);
 			path = WalkingTheDog;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36DE36D61F265907002F4134 /* WalkSummary.swift in Sources */,
 				364925021F1D0A5700DE724D /* AddEditDog.swift in Sources */,
 				360162041F19046500B1B2A8 /* ViewController.swift in Sources */,
 				36088A351F1D194200D53B19 /* SQLHelper.swift in Sources */,

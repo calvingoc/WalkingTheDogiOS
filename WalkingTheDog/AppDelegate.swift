@@ -18,14 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        let ref = Database.database().reference()
         GADMobileAds.configure(withApplicationID: "ca-app-pub-9578859157437430~1781136107")
+        SQLHelper.sharedInstance.setListeners(ref: ref)
         if let userSettings = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? UserWalkingTheDogSettings{
             userSettings.currentDog = userSettings.defaultDog
             userSettings.dogsOnWalk = userSettings.defDogsOnWalk
+            let today = Date()
+            if Calendar(identifier: Calendar.Identifier.gregorian).startOfDay(for: today) != Calendar(identifier: Calendar.Identifier.gregorian).startOfDay(for: userSettings.lastTimeSynced){
+                SQLHelper.sharedInstance.resetDogs(ref: ref)
+            }
         }
-        let ref = Database.database().reference()
-        SQLHelper.sharedInstance.setListeners(ref: ref)
-        // Override point for customization after application launch.
         return true
     }
 
