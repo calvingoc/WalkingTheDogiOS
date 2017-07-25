@@ -24,6 +24,10 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>This app uses the camera to take a picture of your pup.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app tracks your location while on walks.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>This app tracks your location while on walks.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app tracks your location while on walks.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -39,8 +43,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -49,9 +51,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This app tracks your location while on walks.</string>
-	<key>NSLocationUsageDescription</key>
-	<string>This app tracks your location while on walks.</string>
 </dict>
 </plist>
