@@ -87,7 +87,11 @@ class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, C
         if mins > 0 {
             curSecs = curSecs - (mins * 60)
         }
-        timeValue.text = "\(mins):\(curSecs)"
+        var time = "\(curSecs)"
+        if curSecs < 10 {
+            time = "0\(curSecs)"
+        }
+        timeValue.text = "\(mins):time"
     }
     
     
