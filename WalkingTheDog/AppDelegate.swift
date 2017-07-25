@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleMobileAds
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 SQLHelper.sharedInstance.resetDogs(ref: ref)
             }
         }
+        let center = UNUserNotificationCenter.current()
+        let options: UNAuthorizationOptions = [.alert]
+        center.requestAuthorization(options: options, completionHandler: { (granted, error) in
+            if !granted {
+                print("authorization didn't work")
+            }})
         return true
     }
 

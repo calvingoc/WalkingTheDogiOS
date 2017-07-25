@@ -11,6 +11,7 @@ import MapKit
 import CoreLocation
 import GoogleMobileAds
 import Firebase
+import UserNotifications
 import UIKit
 
 class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, GADBannerViewDelegate {
@@ -29,12 +30,14 @@ class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, C
     @IBOutlet weak var timeValue: UILabel!
     let locationManager = CLLocationManager()
     var lastLocation: CLLocation?
-    var totalDistance = 0.0
+    var totalDistance = 0.00
     var locationCount = 0
     var cellArray = SQLHelper.sharedInstance.allDogsOnWalk()
     let allDogsArray = SQLHelper.sharedInstance.allDogs()
     var walkTimer = Timer()
     var totalSeconds = 0
+    let identifier = "WalkingTheDogNotification"
+    let center = UNUserNotificationCenter.current()
     
     var mUserSettings: UserWalkingTheDogSettings?
     
@@ -63,6 +66,18 @@ class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, C
         request.testDevices = [ kGADSimulatorID ]
         bannerView.load(request)
         bannerView.delegate = self
+        
+        let contents = UNMutableNotificationContent()
+        contents.title = "Walking the Dog"
+        contents.body = "You have a walk active."
+        let triggers = UNTimeIntervalNotificationTrigger(timeInterval: 900, repeats: true)
+        let notRequest = UNNotificationRequest(identifier: identifier, content: contents, trigger: triggers)
+        center.add(notRequest, withCompletionHandler: { (error) in
+            if let error = error{
+                print("notification failed \(error)")
+            }
+        })
+        
     }
     
     func updateTimer(){
@@ -72,7 +87,7 @@ class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, C
         if mins > 0 {
             curSecs = curSecs - (mins * 60)
         }
-        timeValue.text = "\(mins):\(curSecs) mins"
+        timeValue.text = "\(mins):\(curSecs)"
     }
     
     
@@ -95,6 +110,8 @@ class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, C
         let ref = Database.database().reference()
         walkTimer.invalidate()
         locationManager.stopUpdatingLocation()
+        center.removeDeliveredNotifications(withIdentifiers: [identifier])
+        center.removePendingNotificationRequests(withIdentifiers: [identifier])
         var streakHit = false
         for pups in cellArray{
             if (pups.curTime < pups.timeGoal || pups.curDist < pups.distGoal || pups.curWalks < pups.walkGoal) {
@@ -175,7 +192,7 @@ class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, C
                 secondsString = "0" + secondsString
             }
             cell.time.text = "\(hours):" + minutesString + secondsString
-            cell.walks.text = "\(walksVal)"
+            cell.walks.text = "\(Int(walksVal))"
             cell.miles.text = "\(milesVal)"
             return cell
         } else {
@@ -229,7 +246,7 @@ class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, C
             map.setRegion(region, animated: true)
             self.map.showsUserLocation = true
             totalDistance = totalDistance + (lastLocation?.distance(from: locations[0]))! / 1609.34
-            milesValue.text = "\(totalDistance) mi"
+            milesValue.text = "\(totalDistance)"
             lastLocation = locations[0]
             locationCount = 0
         } else {

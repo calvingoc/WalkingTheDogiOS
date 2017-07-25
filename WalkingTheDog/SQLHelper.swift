@@ -350,7 +350,9 @@ public class SQLHelper {
             let mUserSettings = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? UserWalkingTheDogSettings
             let dogsString = mUserSettings?.dogsOnWalk.components(separatedBy: ",")
             for pups in dogsString! {
-                dogsArray.append(Int64(pups)!)
+                if pups != "" {
+                    dogsArray.append(Int64(pups)!)
+                }
             }
             var allData = [CellData]()
             for dog in try db!.prepare(dogs){
@@ -411,7 +413,9 @@ public class SQLHelper {
             let mUserSettings = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? UserWalkingTheDogSettings
             let dogsString = mUserSettings?.dogsOnWalk.components(separatedBy: ",")
             for pups in dogsString! {
-                dogsArray.append(Int64(pups)!)
+                if pups != "" && pups != nil{
+                    dogsArray.append(Int64(pups)!)
+                }
             }
             var allData = [CellData]()
             for dog in try db!.prepare(dogs.filter(dogsArray.contains(id))){
