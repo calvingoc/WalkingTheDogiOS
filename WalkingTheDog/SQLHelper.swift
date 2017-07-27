@@ -45,7 +45,7 @@ public class SQLHelper {
     let updateTracker = Expression<Double>("updateTracker")
     
     let dogs = Table("dogs")
-    let achievements = Table("achievements")
+    let achievements = Table("self.achievements")
     var db: Connection?
     static var sharedInstance = SQLHelper()
     
@@ -57,7 +57,7 @@ public class SQLHelper {
     
     
     init() {
-        DispatchQueue.global(qos: .background).async {
+        
         do{
             let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
             self.db = try Connection("\(path)/WalkingTheDog.sqlite3")
@@ -83,131 +83,139 @@ public class SQLHelper {
                 t.column(self.bestWalks)
                 t.column(self.bestStreak)
                 t.column(self.lastDaySync)
-                t.column(picPath)
-                t.column(onlineID)}))
+                t.column(self.picPath)
+                t.column(self.onlineID)}))
             
-            try db!.run(achievements.create(temporary: false, ifNotExists:true, block: { t in
-                t.column(id, primaryKey: true)
-                t.column(achievement)
-                t.column(completed)
-                t.column(seen)
-                t.column(date)
+            try self.db!.run(self.achievements.create(temporary: false, ifNotExists:true, block: { t in
+                t.column(self.id, primaryKey: true)
+                t.column(self.achievement)
+                t.column(self.completed)
+                t.column(self.seen)
+                t.column(self.date)
                 t.column(self.threshold)
-                t.column(progress)
-                t.column(type)
-                t.column(updateTracker)}))
+                t.column(self.progress)
+                t.column(self.type)
+                t.column(self.updateTracker)}))
         } catch {
             print("connection failed")
         }
-        }
+        
     }
     
     
     func setUpTables(){
+        DispatchQueue.global(qos: .background).async {
+       
         do {
-            if try db!.scalar(achievements.count) == 0 {
-            let rowID = try db!.run(achievements.insert(achievement <- "Potted a Puppy;Make your first dog.", completed <- 0, date <- 0, seen <- 1, threshold <- 1, progress <- 0, type <- 0, updateTracker <- 0))
+            if try self.db!.scalar(self.achievements.count) == 0 {
+            let rowID = try self.db!.run(self.achievements.insert(self.achievement <- "Potted a Puppy;Make your first dog.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 1, self.progress <- 0, self.type <- 0, self.updateTracker <- 0))
             print("inserted id: \(rowID)")
-            try db!.run(achievements.insert(achievement <- "Windowsill Lab Garden;Make five dogs.", completed <- 0, date <- 0, seen <- 1, threshold <- 5, progress <- 0, type <- 0, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Backyard Pug Plot;Make ten dogs.", completed <- 0, date <- 0, seen <- 1, threshold <- 10, progress <- 0, type <- 0, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Corgi Farmer; Make 100 dogs.", completed <- 0, date <- 0, seen <- 1, threshold <- 100, progress <- 0, type <- 0, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Walking the Dog;Take your first walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 1, progress <- 0, type <- 1, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Stretching Your Legs; Take ten walks.", completed <- 0, date <- 0, seen <- 1, threshold <- 10, progress <- 0, type <- 1, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Professional Dog Walker; Take one hundred walks.", completed <- 0, date <- 0, seen <- 1, threshold <- 100, progress <- 0, type <- 1, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Dog Walking Mastery;Take one thousand walks.", completed <- 0, date <- 0, seen <- 1, threshold <- 1000, progress <- 0, type <- 1, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "You Could Have Watched an Episode of Criminal Minds;One hour of walk time.", completed <- 0, date <- 0, seen <- 1, threshold <- 60, progress <- 0, type <- 2, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "You Could Have Watched 2/3s of the Lord Of The Rings Extended Edition;Ten hours of walk time.", completed <- 0, date <- 0, seen <- 1, threshold <- 600, progress <- 0, type <- 2, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Ain't Got Time to Sleep;24 hours of walk time.", completed <- 0, date <- 0, seen <- 1, threshold <- 1440, progress <- 0, type <- 2, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "You're All Out of Bubble Gum;100 hours of walk time.", completed <- 0, date <- 0, seen <- 1, threshold <- 6000, progress <- 0, type <- 2, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Still Have Time Before the First Line in 2001: A Space Odyssey;A week of walk time.", completed <- 0, date <- 0, seen <- 1, threshold <- 10080, progress <- 0, type <- 2, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Game Over Man, Game Over;1000 hours of walk time.", completed <- 0, date <- 0, seen <- 1, threshold <- 60000, progress <- 0, type <- 2, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Can I Have My Shoes Back?;Walk a mile.", completed <- 0, date <- 0, seen <- 1, threshold <- 1, progress <- 0, type <- 3, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Hot to Trot;Walk ten miles.", completed <- 0, date <- 0, seen <- 1, threshold <- 10, progress <- 0, type <- 3, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Made It to Athens (Please Don't Die Now);Walk a marathon.", completed <- 0, date <- 0, seen <- 1, threshold <- 26.2, progress <- 0, type <- 3, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "How Do I Get Home?;Walk 100 miles.", completed <- 0, date <- 0, seen <- 1, threshold <- 100, progress <- 0, type <- 3, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "The Iditarod? Show Off;Walk 1000 miles.", completed <- 0, date <- 0, seen <- 1, threshold <- 1000, progress <- 0, type <- 3, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Warming Up;Half an hour in one walk", completed <- 0, date <- 0, seen <- 1, threshold <- 30, progress <- 0, type <- 4, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Was It a Good Podcase?;Hour in one walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 60, progress <- 0, type <- 4, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Hope You Brought Water; Hour and a half in one walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 90, progress <- 0, type <- 4, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Up Next, Nap Time;2 hours in one walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 120, progress <- 0, type <- 4, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "You Got Lost;5 hours in one walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 300, progress <- 0, type <- 4, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "A Smile a Mile;Mile in one walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 1, progress <- 0, type <- 5, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Gotta Hit That Distance Goal;2 miles in one walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 2, progress <- 0, type <- 5, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "It Was For Charity;5k in one walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 3, progress <- 0, type <- 5, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "I Hope You Don't Have a Dachsund;5 miles in one walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 5, progress <- 0, type <- 5, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Dog Athlete;10k in one walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 6, progress <- 0, type <- 5, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "WHY WON'T YOU POO?;10 miles in one walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 10, progress <- 0, type <- 5, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Do You Bring Up Your Rescue Dog Or Your Marathon First?;26.2 miles in one walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 26.2, progress <- 0, type <- 5, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Power Walker; 3 miles an hour in a walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 3, progress <- 0, type <- 6, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Don't Forget To Pee;5 miles an hour in a walk.", completed <- 0, date <- 0, seen <- 1, threshold <- 5, progress <- 0, type <- 6, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "I Like Stars;Hit your goals.", completed <- 0, date <- 0, seen <- 1, threshold <- 1, progress <- 0, type <- 11, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Star Gazing;5 day streak.", completed <- 0, date <- 0, seen <- 1, threshold <- 5, progress <- 0, type <- 7, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "The Perfect Week;7 day streak.", completed <- 0, date <- 0, seen <- 1, threshold <- 7, progress <- 0, type <- 7, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "In the Habit;10 day streak.", completed <- 0, date <- 0, seen <- 1, threshold <- 10, progress <- 0, type <- 7, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Streaking;30 day streak.", completed <- 0, date <- 0, seen <- 1, threshold <- 30, progress <- 0, type <- 7, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Luckiest Dog in the World;365 day streak.", completed <- 0, date <- 0, seen <- 1, threshold <- 365, progress <- 0, type <- 7, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Getting Your Daily Dose of Vitamin D;Walk an hour in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 60, progress <- 0, type <- 8, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Gameification, Heard of It?;Walk 1.5 hours in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 90, progress <- 0, type <- 8, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "The Kids Put On The Teletubbies Movies Again?;2 hours in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 120, progress <- 0, type <- 8, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "How's Retirement?;5 hours in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 300, progress <- 0, type <- 8, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Bring Your Dog To Work Day;8 hours in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 480, progress <- 0, type <- 8, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Round the Block;Mile in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 1, progress <- 0, type <- 9, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "There and Back Again;2 miles in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 2, progress <- 0, type <- 9, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Summer Has Finally Come;5 miles in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 5, progress <- 0, type <- 9, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Day at the Dog Park;10 miles in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 10, progress <- 0, type <- 9, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "Took You All Day?;26.2 miles in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 26.2, progress <- 0, type <- 9, updateTracker <- 0))
-            try db!.run(achievements.insert(achievement <- "I'm Sorry Your Dog Has IBS;Five walks in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 5, progress <- 0, type <- 10, updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Windowsill Lab Garden;Make five dogs.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 5, self.progress <- 0, self.type <- 0, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Backyard Pug Plot;Make ten dogs.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 10, self.progress <- 0, self.type <- 0, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Corgi Farmer; Make 100 dogs.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 100, self.progress <- 0, self.type <- 0, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Walking the Dog;Take your first walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 1, self.progress <- 0, self.type <- 1, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Stretching Your Legs; Take ten walks.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 10, self.progress <- 0, self.type <- 1, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Professional Dog Walker; Take one hundred walks.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 100, self.progress <- 0, self.type <- 1, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Dog Walking Mastery;Take one thousand walks.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 1000, self.progress <- 0, self.type <- 1, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "You Could Have Watched an Episode of Criminal Minds;One hour of walk time.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 60, self.progress <- 0, self.type <- 2, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "You Could Have Watched 2/3s of the Lord Of The Rings Extended Edition;Ten hours of walk time.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 600, self.progress <- 0, self.type <- 2, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Ain't Got Time to Sleep;24 hours of walk time.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 1440, self.progress <- 0, self.type <- 2, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "You're All Out of Bubble Gum;100 hours of walk time.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 6000, self.progress <- 0, self.type <- 2, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Still Have Time Before the First Line in 2001: A Space Odyssey;A week of walk time.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 10080, self.progress <- 0, self.type <- 2, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Game Over Man, Game Over;1000 hours of walk time.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 60000, self.progress <- 0, self.type <- 2, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Can I Have My Shoes Back?;Walk a mile.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 1, self.progress <- 0, self.type <- 3, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Hot to Trot;Walk ten miles.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 10, self.progress <- 0, self.type <- 3, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Made It to Athens (Please Don't Die Now);Walk a marathon.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 26.2, self.progress <- 0, self.type <- 3, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "How Do I Get Home?;Walk 100 miles.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 100, self.progress <- 0, self.type <- 3, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "The Iditarod? Show Off;Walk 1000 miles.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 1000, self.progress <- 0, self.type <- 3, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Warming Up;Half an hour in one walk", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 30, self.progress <- 0, self.type <- 4, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Was It a Good Podcase?;Hour in one walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 60, self.progress <- 0, self.type <- 4, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Hope You Brought Water; Hour and a half in one walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 90, self.progress <- 0, self.type <- 4, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Up Next, Nap Time;2 hours in one walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 120, self.progress <- 0, self.type <- 4, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "You Got Lost;5 hours in one walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 300, self.progress <- 0, self.type <- 4, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "A Smile a Mile;Mile in one walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 1, self.progress <- 0, self.type <- 5, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Gotta Hit That Distance Goal;2 miles in one walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 2, self.progress <- 0, self.type <- 5, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "It Was For Charity;5k in one walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 3, self.progress <- 0, self.type <- 5, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "I Hope You Don't Have a Dachsund;5 miles in one walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 5, self.progress <- 0, self.type <- 5, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Dog Athlete;10k in one walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 6, self.progress <- 0, self.type <- 5, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "WHY WON'T YOU POO?;10 miles in one walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 10, self.progress <- 0, self.type <- 5, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Do You Bring Up Your Rescue Dog Or Your Marathon First?;26.2 miles in one walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 26.2, self.progress <- 0, self.type <- 5, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Power Walker; 3 miles an hour in a walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 3, self.progress <- 0, self.type <- 6, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Don't Forget To Pee;5 miles an hour in a walk.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 5, self.progress <- 0, self.type <- 6, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "I Like Stars;Hit your goals.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 1, self.progress <- 0, self.type <- 11, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Star Gazing;5 day streak.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 5, self.progress <- 0, self.type <- 7, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "The Perfect Week;7 day streak.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 7, self.progress <- 0, self.type <- 7, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "In the Habit;10 day streak.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 10, self.progress <- 0, self.type <- 7, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Streaking;30 day streak.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 30, self.progress <- 0, self.type <- 7, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Luckiest Dog in the World;365 day streak.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 365, self.progress <- 0, self.type <- 7, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Getting Your Daily Dose of Vitamin D;Walk an hour in a day.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 60, self.progress <- 0, self.type <- 8, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Gameification, Heard of It?;Walk 1.5 hours in a day.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 90, self.progress <- 0, self.type <- 8, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "The Kids Put On The Teletubbies Movies Again?;2 hours in a day.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 120, self.progress <- 0, self.type <- 8, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "How's Retirement?;5 hours in a day.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 300, self.progress <- 0, self.type <- 8, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Bring Your Dog To Work Day;8 hours in a day.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 480, self.progress <- 0, self.type <- 8, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Round the Block;Mile in a day.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 1, self.progress <- 0, self.type <- 9, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "There and Back Again;2 miles in a day.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 2, self.progress <- 0, self.type <- 9, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Summer Has Finally Come;5 miles in a day.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 5, self.progress <- 0, self.type <- 9, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Day at the Dog Park;10 miles in a day.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 10, self.progress <- 0, self.type <- 9, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "Took You All Day?;26.2 miles in a day.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 26.2, self.progress <- 0, self.type <- 9, self.updateTracker <- 0))
+            try self.db!.run(self.achievements.insert(self.achievement <- "I'm Sorry Your Dog Has IBS;Five walks in a day.", self.completed <- 0, self.date <- 0, self.seen <- 1, self.threshold <- 5, self.progress <- 0, self.type <- 10, self.updateTracker <- 0))
             }
         } catch {
             print("insertion failed: \(error)")
+        }
         }
     
     }
     
     func updateAchievements(updateType: Int64, value: Double){
-        let query = achievements.select(progress, threshold, updateTracker, completed, date, seen, id).filter(updateType == type)
+        DispatchQueue.global(qos: .background).async {
+        let query = self.achievements.select(self.progress, self.threshold, self.updateTracker, self.completed, self.date, self.seen, self.id).filter(updateType == self.type)
         do {
-            for results in try db!.prepare(query){
-                var prog = results[progress] + value
+            for results in try self.db!.prepare(query){
+                var prog = results[self.progress] + value
                 if (updateType == 7){
                     prog = value
                 }
-                let update = achievements.filter(id == results[id])
-                try db!.run(update.update(progress <- prog))
-                if (prog >= results[threshold] && results[updateTracker] == 0){
-                    try db!.run(update.update(completed <- results[completed] + 1))
-                    try db!.run(update.update(updateTracker <- 1))
+                let update = self.achievements.filter(self.id == results[self.id])
+                try self.db!.run(update.update(self.progress <- prog))
+                if (prog >= results[self.threshold] && results[self.updateTracker] == 0){
+                    try self.db!.run(update.update(self.completed <- results[self.completed] + 1))
+                    try self.db!.run(update.update(self.updateTracker <- 1))
                     let time = Double(NSDate().timeIntervalSince1970) * 1000
-                    try db!.run(update.update(date <- time))
-                    try db!.run(update.update(seen <- 0))
+                    try self.db!.run(update.update(self.date <- time))
+                    try self.db!.run(update.update(self.seen <- 0))
                     }
                 
             }
         } catch {
             print("update failed \(error)")
         }
+        }
         
         
     }
     
     func resetAchievements(updateType: Int64){
-        let query = achievements.select(updateTracker, progress, id).filter(updateType == type)
+        DispatchQueue.global(qos: .background).async {
+
+        let query = self.achievements.select(self.updateTracker, self.progress, self.id).filter(updateType == self.type)
         do {
-            for results in try db!.prepare(query){
-                let update = achievements.filter(id == results[id])
-                try db!.run(update.update(updateTracker <- 0))
-                try db!.run(update.update(progress <- 0))
+            for results in try self.db!.prepare(query){
+                let update = self.achievements.filter(self.id == results[self.id])
+                try self.db!.run(update.update(self.updateTracker <- 0))
+                try self.db!.run(update.update(self.progress <- 0))
             }
         } catch{
             print("reset failed \(error)")
+        }
         }
     }
     
     func markAsSeen(){
         do{
-            try db!.run(achievements.update(seen <- 1))
+            try db!.run(self.achievements.update(seen <- 1))
         } catch{
-            print("mark ans seen failed \(error)")
+            print("mark ans self.seen failed \(error)")
         }
         
     }
@@ -281,37 +289,41 @@ public class SQLHelper {
     }
     
     public func onlineUpdate(newDogName: String, onlId: String, newWalksGoal: Double, newTimeGoal: Double, newDistGoal: Double, newcurTime: Double, newCurWalks: Double, newCurDist: Double, newStreak: Double, newTotWalks: Double, newTotTime: Double, newTotDist: Double, newTotDays: Double, newBestTime: Double, newBestDist: Double, newBestTimeDay: Double, newBestDistDay: Double, newBestWAlks: Double, newBestStreaks: Double, newLastDaySynced: Double) {
+        DispatchQueue.global(qos: .background).async {
+
         do{
-            let dogToUpdate = dogs.filter(onlineID == onlId)
-            try db!.run(dogToUpdate.update(dogName <- newDogName))
-            try db!.run(dogToUpdate.update(walksGoal <- newWalksGoal))
-            try db!.run(dogToUpdate.update(timeGoal <- newTimeGoal))
-            try db!.run(dogToUpdate.update(distGoal <- newDistGoal))
-            try db!.run(dogToUpdate.update(curTime <- newcurTime))
-            try db!.run(dogToUpdate.update(curWalks <- newCurWalks))
-            try db!.run(dogToUpdate.update(curDist <- newCurDist))
-            try db!.run(dogToUpdate.update(streak <- newStreak))
-            try db!.run(dogToUpdate.update(totWalks <- newTotWalks))
-            try db!.run(dogToUpdate.update(totTime <- newTotTime))
-            try db!.run(dogToUpdate.update(totDist <- newTotDist))
-            try db!.run(dogToUpdate.update(totDays <- newTotDays))
-            try db!.run(dogToUpdate.update(bestTime <- newBestTime))
-            try db!.run(dogToUpdate.update(bestDist <- newBestDist))
-            try db!.run(dogToUpdate.update(bestTimeDay <- newBestTimeDay))
-            try db!.run(dogToUpdate.update(bestDistDay <- newBestDistDay))
-            try db!.run(dogToUpdate.update(bestWalks <- newBestWAlks))
-            try db!.run(dogToUpdate.update(bestStreak <- newBestStreaks))
-            try db!.run(dogToUpdate.update(lastDaySync <- newLastDaySynced))
+            let dogToUpdate = self.dogs.filter(self.onlineID == onlId)
+            try self.db!.run(dogToUpdate.update(self.dogName <- newDogName))
+            try self.db!.run(dogToUpdate.update(self.walksGoal <- newWalksGoal))
+            try self.db!.run(dogToUpdate.update(self.timeGoal <- newTimeGoal))
+            try self.db!.run(dogToUpdate.update(self.distGoal <- newDistGoal))
+            try self.db!.run(dogToUpdate.update(self.curTime <- newcurTime))
+            try self.db!.run(dogToUpdate.update(self.curWalks <- newCurWalks))
+            try self.db!.run(dogToUpdate.update(self.curDist <- newCurDist))
+            try self.db!.run(dogToUpdate.update(self.streak <- newStreak))
+            try self.db!.run(dogToUpdate.update(self.totWalks <- newTotWalks))
+            try self.db!.run(dogToUpdate.update(self.totTime <- newTotTime))
+            try self.db!.run(dogToUpdate.update(self.totDist <- newTotDist))
+            try self.db!.run(dogToUpdate.update(self.totDays <- newTotDays))
+            try self.db!.run(dogToUpdate.update(self.bestTime <- newBestTime))
+            try self.db!.run(dogToUpdate.update(self.bestDist <- newBestDist))
+            try self.db!.run(dogToUpdate.update(self.bestTimeDay <- newBestTimeDay))
+            try self.db!.run(dogToUpdate.update(self.bestDistDay <- newBestDistDay))
+            try self.db!.run(dogToUpdate.update(self.bestWalks <- newBestWAlks))
+            try self.db!.run(dogToUpdate.update(self.bestStreak <- newBestStreaks))
+            try self.db!.run(dogToUpdate.update(self.lastDaySync <- newLastDaySynced))
         } catch{
             print("add dog failed \(error)")
+        }
         }
     }
     
     public func setListeners(ref: DatabaseReference){
+        DispatchQueue.global(qos: .background).async {
         do{
-            let query = dogs.filter(onlineID != nil && onlineID != "")
-            for dogs in try db!.prepare(query){
-                let onlID = dogs[onlineID]
+            let query = self.dogs.filter(self.onlineID != nil && self.onlineID != "")
+            for dogs in try self.db!.prepare(query){
+                let onlID = dogs[self.onlineID]
                 ref.child(onlID!).observe(DataEventType.value, with: { (snapshot) in
                     let dog = snapshot.value as? NSDictionary
                     SQLHelper.sharedInstance.onlineUpdate(newDogName: dog?["name"] as? String ?? "", onlId: onlID!, newWalksGoal: dog?["numWalksGoals"] as? Double ?? 0, newTimeGoal: dog?["timeGoals"] as? Double ?? 0, newDistGoal: dog?["distanceGoal"] as? Double ?? 0, newcurTime: dog?["walkTime"] as? Double ?? 0, newCurWalks: dog?["numWalks"] as? Double ?? 0, newCurDist: dog?["curentDistance"] as? Double ?? 0, newStreak: dog?["streak"] as? Double ?? 0, newTotWalks: dog?["totalWalks"] as? Double ?? 0, newTotTime: dog?["totalTime"] as? Double ?? 0, newTotDist: dog?["totalDist"] as? Double ?? 0, newTotDays: dog?["totalDays"] as? Double ?? 0, newBestTime: dog?["bestTimeWalk"] as? Double ?? 0, newBestDist: dog?["BestDistWalk"] as? Double ?? 0, newBestTimeDay: dog?["bestTimeDay"] as? Double ?? 0, newBestDistDay: dog?["bestDistDay"] as? Double ?? 0, newBestWAlks: dog?["bestWalks"] as? Double ?? 0, newBestStreaks: dog?["bestStreak"] as? Double ?? 0, newLastDaySynced: dog?["lastDaySynced"] as? Double ?? 0)
@@ -320,6 +332,7 @@ public class SQLHelper {
             }
         } catch{
             print("listeners failed \(error)")
+        }
         }
     }
     
@@ -386,7 +399,7 @@ public class SQLHelper {
             }
             return allData
         } catch {
-            print("making achievement cells failed \(error)")
+            print("making self.achievement cells failed \(error)")
             let cell = achievementsCellData(inName: "failed to load achievements;sorry", inCompleted: 1, inSeen: 1, inThreshold: 1, inProgress: 1, inType: 1)
             return[cell]
         }
@@ -396,15 +409,15 @@ public class SQLHelper {
     func newAchievements() -> [achievementsCellData]{
         do {
             var allData = [achievementsCellData]()
-            let query = achievements.filter(SQLHelper.sharedInstance.seen == 0)
+            let query = self.achievements.filter(SQLHelper.sharedInstance.seen == 0)
             for ach in try db!.prepare(query){
                 let cell = achievementsCellData(inName: ach[achievement], inCompleted: ach[completed], inSeen: ach[seen], inThreshold: ach[threshold], inProgress: ach[progress], inType: ach[type])
                 allData.append(cell)
             }
             return allData
         } catch {
-            print("making achievement cells failed \(error)")
-            let cell = achievementsCellData(inName: "failed to load achievements;sorry", inCompleted: 1, inSeen: 1, inThreshold: 1, inProgress: 1, inType: 1)
+            print("making self.achievement cells failed \(error)")
+            let cell = achievementsCellData(inName: "failed to load self.achievements;sorry", inCompleted: 1, inSeen: 1, inThreshold: 1, inProgress: 1, inType: 1)
             return[cell]
         }
         

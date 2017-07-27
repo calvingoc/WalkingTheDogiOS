@@ -115,10 +115,9 @@ class AddEditDog: UIViewController, UINavigationControllerDelegate, UIImagePicke
     @IBAction func takePicture(_ sender: UIButton){
         let imagePicker = UIImagePickerController()
         if UIImagePickerController.isSourceTypeAvailable(.camera){
-            imagePicker.sourceType = .camera
+            imagePicker.sourceType = .savedPhotosAlbum
         } else {
-            takePicButton.setTitle("No Camera Found", for: .normal)
-            takePicButton.isEnabled = false
+            imagePicker.sourceType = .savedPhotosAlbum
         }
         imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
