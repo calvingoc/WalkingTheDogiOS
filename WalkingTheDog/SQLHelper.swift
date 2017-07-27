@@ -103,7 +103,7 @@ public class SQLHelper {
     
     func setUpTables(){
         do {
-        
+            if try db!.scalar(achievements.count) == 0 {
             let rowID = try db!.run(achievements.insert(achievement <- "Potted a Puppy;Make your first dog.", completed <- 0, date <- 0, seen <- 1, threshold <- 1, progress <- 0, type <- 0, updateTracker <- 0))
             print("inserted id: \(rowID)")
             try db!.run(achievements.insert(achievement <- "Windowsill Lab Garden;Make five dogs.", completed <- 0, date <- 0, seen <- 1, threshold <- 5, progress <- 0, type <- 0, updateTracker <- 0))
@@ -155,6 +155,7 @@ public class SQLHelper {
             try db!.run(achievements.insert(achievement <- "Day at the Dog Park;10 miles in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 10, progress <- 0, type <- 9, updateTracker <- 0))
             try db!.run(achievements.insert(achievement <- "Took You All Day?;26.2 miles in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 26.2, progress <- 0, type <- 9, updateTracker <- 0))
             try db!.run(achievements.insert(achievement <- "I'm Sorry Your Dog Has IBS;Five walks in a day.", completed <- 0, date <- 0, seen <- 1, threshold <- 5, progress <- 0, type <- 10, updateTracker <- 0))
+            }
         } catch {
             print("insertion failed: \(error)")
         }

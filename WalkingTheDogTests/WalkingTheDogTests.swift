@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import FirebaseCore
 @testable import WalkingTheDog
 
 class WalkingTheDogTests: XCTestCase {

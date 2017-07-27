@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class ImportDog: UIViewController, UINavigationControllerDelegate {
+class ImportDog: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate {
     
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
@@ -45,6 +45,11 @@ class ImportDog: UIViewController, UINavigationControllerDelegate {
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     @IBAction func createNewDog(_ sender: Any) {
         if (mUserSettings != nil){
             mUserSettings.currentDog = -1
@@ -55,6 +60,8 @@ class ImportDog: UIViewController, UINavigationControllerDelegate {
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "New Dog") as! AddEditDog
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
+    
+    
     
     @IBAction func checkID(_ sender: Any) {
         view.endEditing(true)

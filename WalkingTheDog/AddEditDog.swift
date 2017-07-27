@@ -8,7 +8,7 @@
 
 import Foundation
 import Firebase
-class AddEditDog: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+class AddEditDog: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate{
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
@@ -46,6 +46,11 @@ class AddEditDog: UIViewController, UINavigationControllerDelegate, UIImagePicke
             SQLHelper.sharedInstance.setUpTables()
         }
         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     func sideMenu(){

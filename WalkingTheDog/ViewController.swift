@@ -129,6 +129,7 @@ class ViewController: UIViewController, GADBannerViewDelegate {
             dogName.text = (dogRow?.get(SQLHelper.sharedInstance.dogName))! + "'s Progress"
             if (dogRow?.get(SQLHelper.sharedInstance.picPath) != "default"){
                 dogPicture.image = ImageStore().loadImage(key: "WalkingTheDog\(String(mUserSettings!.currentDog))")
+                //dogPicture.transform = dogPicture.transform.rotated(by: CGFloat(Double.pi/2 + Double.pi))
             }
             print ("imageKey 3 WalkingTheDog\(String(mUserSettings!.currentDog))")
             var hours = Int(dogRow!.get(SQLHelper.sharedInstance.curTime) / 60)
@@ -142,7 +143,7 @@ class ViewController: UIViewController, GADBannerViewDelegate {
             }
             todayWalkValue.text = "\(Int(dogRow!.get(SQLHelper.sharedInstance.curWalks))) / \(Int(dogRow!.get(SQLHelper.sharedInstance.walksGoal)))"
             todayTimeValue.text = "\(hours):" + minutesString + secondsString + "/ \(Int(dogRow!.get(SQLHelper.sharedInstance.timeGoal)))"
-            todayDistanceValue.text = "\(String(describing: dogRow!.get(SQLHelper.sharedInstance.curDist))) / \(String(describing: dogRow!.get(SQLHelper.sharedInstance.distGoal)))"
+            todayDistanceValue.text = "\(dogRow!.get(SQLHelper.sharedInstance.curDist).roundTo(places: 2)) / \(String(describing: dogRow!.get(SQLHelper.sharedInstance.distGoal)))"
             todayStreakValue.text = "\(String(describing: dogRow!.get(SQLHelper.sharedInstance.streak)))"
             if dogRow!.get(SQLHelper.sharedInstance.curWalks) >= dogRow!.get(SQLHelper.sharedInstance.walksGoal) {
                 walksStar.image = UIImage(named: "btn_star_big_on")

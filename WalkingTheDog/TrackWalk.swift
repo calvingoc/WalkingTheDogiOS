@@ -91,7 +91,7 @@ class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, C
         if curSecs < 10 {
             time = "0\(curSecs)"
         }
-        timeValue.text = "\(mins):time"
+        timeValue.text = "\(mins):\(time)"
     }
     
     
@@ -250,7 +250,7 @@ class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, C
             map.setRegion(region, animated: true)
             self.map.showsUserLocation = true
             totalDistance = totalDistance + (lastLocation?.distance(from: locations[0]))! / 1609.34
-            milesValue.text = "\(totalDistance)"
+            milesValue.text = "\(totalDistance.roundTo(places: 2))"
             lastLocation = locations[0]
             locationCount = 0
         } else {
