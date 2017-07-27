@@ -208,7 +208,7 @@ class AddEditDog: UIViewController, UINavigationControllerDelegate, UIImagePicke
             if onlineID != "" {
                 ref.child(onlineID + "/name").setValue(dogName.text)
                 ref.child(onlineID + "/numWalksGoals").setValue(NSString(string: walksEditText.text!).doubleValue)
-                ref.child(onlineID + "/timeGoals").setValue(NSString(string: walksEditText.text!).doubleValue)
+                ref.child(onlineID + "/timeGoals").setValue(NSString(string: timeEditText.text!).doubleValue)
                 ref.child(onlineID + "/distanceGoal").setValue(NSString(string: distanceEditText.text!).doubleValue)
             }
             
