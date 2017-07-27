@@ -57,31 +57,32 @@ public class SQLHelper {
     
     
     init() {
+        DispatchQueue.global(qos: .background).async {
         do{
             let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-            db = try Connection("\(path)/WalkingTheDog.sqlite3")
+            self.db = try Connection("\(path)/WalkingTheDog.sqlite3")
             print("SQLPATH \(path)")
-            try db!.run(dogs.create(temporary: false, ifNotExists: true, block:{ t in
-                t.column(id, primaryKey: true)
-                t.column(dogName)
-                t.column(timeGoal)
-                t.column(walksGoal)
-                t.column(distGoal)
-                t.column(curTime)
-                t.column(curWalks)
-                t.column(curDist)
-                t.column(streak)
-                t.column(totWalks)
-                t.column(totTime)
-                t.column(totDist)
-                t.column(totDays)
-                t.column(bestTime)
-                t.column(bestDist)
-                t.column(bestTimeDay)
-                t.column(bestDistDay)
-                t.column(bestWalks)
-                t.column(bestStreak)
-                t.column(lastDaySync)
+            try self.db!.run(self.dogs.create(temporary: false, ifNotExists: true, block:{ t in
+                t.column(self.id, primaryKey: true)
+                t.column(self.dogName)
+                t.column(self.timeGoal)
+                t.column(self.walksGoal)
+                t.column(self.distGoal)
+                t.column(self.curTime)
+                t.column(self.curWalks)
+                t.column(self.curDist)
+                t.column(self.streak)
+                t.column(self.totWalks)
+                t.column(self.totTime)
+                t.column(self.totDist)
+                t.column(self.totDays)
+                t.column(self.bestTime)
+                t.column(self.bestDist)
+                t.column(self.bestTimeDay)
+                t.column(self.bestDistDay)
+                t.column(self.bestWalks)
+                t.column(self.bestStreak)
+                t.column(self.lastDaySync)
                 t.column(picPath)
                 t.column(onlineID)}))
             
@@ -91,12 +92,13 @@ public class SQLHelper {
                 t.column(completed)
                 t.column(seen)
                 t.column(date)
-                t.column(threshold)
+                t.column(self.threshold)
                 t.column(progress)
                 t.column(type)
                 t.column(updateTracker)}))
         } catch {
             print("connection failed")
+        }
         }
     }
     

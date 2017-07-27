@@ -45,7 +45,12 @@ class AddEditDog: UIViewController, UINavigationControllerDelegate, UIImagePicke
             newDogSetUp()
             SQLHelper.sharedInstance.setUpTables()
         }
-        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddEditDog.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard(){
+        view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

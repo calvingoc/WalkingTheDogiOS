@@ -29,6 +29,13 @@ class ImportDog: UIViewController, UINavigationControllerDelegate, UITextFieldDe
         }
         ref = Database.database().reference()
         importID.text = nil
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ImportDog.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard(){
+        view.endEditing(true)
     }
     
     func sideMenu(){
