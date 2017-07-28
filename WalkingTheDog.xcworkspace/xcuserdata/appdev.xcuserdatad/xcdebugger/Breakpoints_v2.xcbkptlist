@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WalkingTheDog/AddEditDog.swift"
-            timestampString = "522857395.289731"
+            timestampString = "522943088.136496"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "generateOnlineID(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WalkingTheDog/SQLHelper.swift"
-            timestampString = "522856296.939893"
+            timestampString = "522942860.428956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "setListeners(ref:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WalkingTheDog/SQLHelper.swift"
-            timestampString = "522854847.1239"
+            timestampString = "522942860.428956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,12 +106,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WalkingTheDog/SQLHelper.swift"
-            timestampString = "522855860.002072"
+            timestampString = "522942860.428956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "addDog(newDogName:nWalksGoal:nTimeGoal:distanceGoal:picturePath:shareID:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WalkingTheDog/AddEditDog.swift"
+            timestampString = "522943109.976967"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "generateOnlineID(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WalkingTheDog.AddEditDog.generateOnlineID (Any) -&gt; ()"
+                  moduleName = "WalkingTheDog"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/appdev/Desktop/ETC%20iOS%20apps/Learning%20iOS/WalkingTheDog/WalkingTheDog/AddEditDog.swift"
+                  timestampString = "522943170.880449"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "604">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WalkingTheDog.AddEditDog.(generateOnlineID (Any) -&gt; ()).(closure #1)"
+                  moduleName = "WalkingTheDog"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/appdev/Desktop/ETC%20iOS%20apps/Learning%20iOS/WalkingTheDog/WalkingTheDog/AddEditDog.swift"
+                  timestampString = "522943170.882985"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "26">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WalkingTheDog/AddEditDog.swift"
+            timestampString = "522943113.554697"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "generateOnlineID(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

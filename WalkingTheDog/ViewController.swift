@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleMobileAds
+import FirebasePerformance
 
 class ViewController: UIViewController, GADBannerViewDelegate {
     @IBOutlet weak var dogName: UILabel!
@@ -76,6 +77,7 @@ class ViewController: UIViewController, GADBannerViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        let trace = Performance.startTrace(name: "main view will appear")
         if let userSettings = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? UserWalkingTheDogSettings{
             if userSettings.currentDog == -1 { userSettings.currentDog = userSettings.defaultDog}
             if  userSettings.defaultDog == -1 {
@@ -94,6 +96,7 @@ class ViewController: UIViewController, GADBannerViewDelegate {
             let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ImportDog") as! ImportDog
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }
+        trace?.stop()
     }
 
     override func didReceiveMemoryWarning() {
@@ -124,6 +127,7 @@ class ViewController: UIViewController, GADBannerViewDelegate {
     }
     
     public func setUpPage(){
+        let trace = Performance.startTrace(name: "set up page")
         if (mUserSettings != nil){
             let dogRow = SQLHelper.sharedInstance.findDog(dogID: (mUserSettings!.currentDog))
             dogName.text = (dogRow?.get(SQLHelper.sharedInstance.dogName))! + "'s Progress"
@@ -241,6 +245,7 @@ class ViewController: UIViewController, GADBannerViewDelegate {
             
             
         }
+        trace?.stop()
     }
     //@IBAction func startWalk(_ sender: Any) {
     //    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

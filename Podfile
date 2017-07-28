@@ -12,6 +12,7 @@ target 'WalkingTheDog' do
 	pod ‘Google-Mobile-Ads-SDK’
 	pod ‘Firebase’
 	pod ‘SQLite.swift’, ‘~> 0.11.3’
+	pod ‘Firebase/Performance’
 
   target 'WalkingTheDogTests' do
     inherit! :search_paths

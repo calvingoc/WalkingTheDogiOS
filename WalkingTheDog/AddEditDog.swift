@@ -131,6 +131,7 @@ class AddEditDog: UIViewController, UINavigationControllerDelegate, UIImagePicke
     }
     
     @IBAction func generateOnlineID(_ sender: Any) {
+        if dogName.text != "" {
         var name: String? = nil
         
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -157,6 +158,10 @@ class AddEditDog: UIViewController, UINavigationControllerDelegate, UIImagePicke
         } else {
             generateOnlineID(shareableIDButton)
         }
+        } else {
+            shareableIDButton.setTitle("Please enter a name and try again.", for: .normal)
+        }
+        
         
     }
     

@@ -9,6 +9,7 @@
 import Foundation
 import SQLite
 import Firebase
+import FirebasePerformance
 
 public class SQLHelper {
     
@@ -59,6 +60,7 @@ public class SQLHelper {
     init() {
         
         do{
+            let trace = Performance.startTrace(name: "set up db")
             let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
             self.db = try Connection("\(path)/WalkingTheDog.sqlite3")
             print("SQLPATH \(path)")
@@ -96,6 +98,7 @@ public class SQLHelper {
                 t.column(self.progress)
                 t.column(self.type)
                 t.column(self.updateTracker)}))
+            trace?.stop()
         } catch {
             print("connection failed")
         }
@@ -169,6 +172,7 @@ public class SQLHelper {
     
     func updateAchievements(updateType: Int64, value: Double){
         DispatchQueue.global(qos: .background).async {
+            let trace = Performance.startTrace(name: "update achievements")
         let query = self.achievements.select(self.progress, self.threshold, self.updateTracker, self.completed, self.date, self.seen, self.id).filter(updateType == self.type)
         do {
             for results in try self.db!.prepare(query){
@@ -186,7 +190,9 @@ public class SQLHelper {
                     try self.db!.run(update.update(self.seen <- 0))
                     }
                 
+                
             }
+            trace?.stop()
         } catch {
             print("update failed \(error)")
         }
@@ -292,6 +298,7 @@ public class SQLHelper {
         DispatchQueue.global(qos: .background).async {
 
         do{
+            let trace = Performance.startTrace(name: "online update")
             let dogToUpdate = self.dogs.filter(self.onlineID == onlId)
             try self.db!.run(dogToUpdate.update(self.dogName <- newDogName))
             try self.db!.run(dogToUpdate.update(self.walksGoal <- newWalksGoal))
@@ -312,6 +319,7 @@ public class SQLHelper {
             try self.db!.run(dogToUpdate.update(self.bestWalks <- newBestWAlks))
             try self.db!.run(dogToUpdate.update(self.bestStreak <- newBestStreaks))
             try self.db!.run(dogToUpdate.update(self.lastDaySync <- newLastDaySynced))
+            trace?.stop()
         } catch{
             print("add dog failed \(error)")
         }
@@ -321,8 +329,10 @@ public class SQLHelper {
     public func setListeners(ref: DatabaseReference){
         DispatchQueue.global(qos: .background).async {
         do{
+            let trace = Performance.startTrace(name: "setListeners")
             let query = self.dogs.filter(self.onlineID != nil && self.onlineID != "")
             for dogs in try self.db!.prepare(query){
+                trace?.incrementCounter(named: "new dog")
                 let onlID = dogs[self.onlineID]
                 ref.child(onlID!).observe(DataEventType.value, with: { (snapshot) in
                     let dog = snapshot.value as? NSDictionary
@@ -330,6 +340,7 @@ public class SQLHelper {
                 })
                 { (error) in print(error.localizedDescription)}
             }
+            trace?.stop()
         } catch{
             print("listeners failed \(error)")
         }
@@ -362,6 +373,7 @@ public class SQLHelper {
     
     func allDogs() -> [CellData]{
         do{
+            let trace = Performance.startTrace(name: "all dogs")
             var dogsArray = [Int64]()
             let mUserSettings = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? UserWalkingTheDogSettings
             let dogsString = mUserSettings?.dogsOnWalk.components(separatedBy: ",")
@@ -381,6 +393,7 @@ public class SQLHelper {
                 let dogCell = CellData(inID: dog[id], inName: dog[dogName], inImage: image, inWalkGoal: dog[walksGoal], inCurWalk: dog[curWalks], inDistGoal: dog[distGoal], inCurDist: dog[curDist], inTimeGoal: dog[timeGoal], inCurTime: dog[curTime], inStreak: dog[streak], inRow: dog, inOnWalk: dogsArray.contains(dog[id]))
                 allData.append(dogCell)
             }
+            trace?.stop()
             return allData
         } catch {
             print("making dog cells failed \(error)")
@@ -425,6 +438,7 @@ public class SQLHelper {
     
     func allDogsOnWalk() -> [CellData]{
         do{
+            let trace = Performance.startTrace(name: "all dogs on walk")
             var dogsArray = [Int64]()
             let mUserSettings = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? UserWalkingTheDogSettings
             let dogsString = mUserSettings?.dogsOnWalk.components(separatedBy: ",")
@@ -444,6 +458,7 @@ public class SQLHelper {
                 let dogCell = CellData(inID: dog[id], inName: dog[dogName], inImage: image, inWalkGoal: dog[walksGoal], inCurWalk: dog[curWalks], inDistGoal: dog[distGoal], inCurDist: dog[curDist], inTimeGoal: dog[timeGoal], inCurTime: dog[curTime], inStreak: dog[streak], inRow: dog, inOnWalk: true)
                 allData.append(dogCell)
             }
+            trace?.stop()
             return allData
         } catch {
             print("making dog cells failed \(error)")
@@ -455,6 +470,7 @@ public class SQLHelper {
     
     func endWalkUpdate(updateId: Int64, time: Double, distance: Double, walks: Double, newStreak: Double, newBestDist: Double, newBestTime: Double) {
         do{
+            let trace = Performance.startTrace(name: "end walk update")
             let dogToUpdate = dogs.filter(id == updateId)
             try db!.run(dogToUpdate.update(curTime <- time))
             try db!.run(dogToUpdate.update(curWalks <- walks))
@@ -462,6 +478,7 @@ public class SQLHelper {
             try db!.run(dogToUpdate.update(streak <- newStreak))
             try db!.run(dogToUpdate.update(bestTime <- newBestTime))
             try db!.run(dogToUpdate.update(bestDist <- newBestDist))
+            trace?.stop()
         } catch {
             print("updating walk failed \(error)")
         }
@@ -469,9 +486,11 @@ public class SQLHelper {
     
     func resetDogs(ref: DatabaseReference) {
         do {
+            let trace = Performance.startTrace(name: "reset dogs")
             let now = Date()
             var maxStreak = 0
             for dog in try db!.prepare(dogs){
+                trace?.incrementCounter(named: "new dog")
                 let sync = Date(timeIntervalSince1970: dog.get(lastDaySync))
                 if Calendar(identifier: Calendar.Identifier.gregorian).startOfDay(for: now) != Calendar(identifier: Calendar.Identifier.gregorian).startOfDay(for: sync){
                     let dogToUpdate = dogs.filter(id == dog.get(id))
@@ -552,6 +571,7 @@ public class SQLHelper {
             } else {
                 SQLHelper.sharedInstance.updateAchievements(updateType: 7, value: Double(maxStreak))
             }
+            trace?.stop()
         } catch {
             print("dog reset failed \(error)")
         }
