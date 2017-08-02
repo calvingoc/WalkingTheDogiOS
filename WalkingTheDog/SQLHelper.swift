@@ -491,7 +491,8 @@ public class SQLHelper {
             var maxStreak = 0
             for dog in try db!.prepare(dogs){
                 trace?.incrementCounter(named: "new dog")
-                let sync = Date(timeIntervalSince1970: dog.get(lastDaySync))
+                let sync = Date(timeIntervalSince1970: dog.get(lastDaySync) / 1000)
+                print ("Time \(dog.get(lastDaySync) / 1000)")
                 if Calendar(identifier: Calendar.Identifier.gregorian).startOfDay(for: now) != Calendar(identifier: Calendar.Identifier.gregorian).startOfDay(for: sync){
                     let dogToUpdate = dogs.filter(id == dog.get(id))
                     let dogOnlineID = dog.get(onlineID)
@@ -502,40 +503,40 @@ public class SQLHelper {
                     if (dog.get(streak) > dog.get(bestStreak)){
                         if dogOnlineID != "" || dogOnlineID != nil {
                             ref.child(dogOnlineID!).child("bestStreak").setValue(dog.get(streak))
-                        } else {
+                        } 
                             try db!.run(dogToUpdate.update(bestStreak <- dog.get(streak)))
-                        }
+                       
                     }
                     if (dog.get(bestDistDay) < dog.get(curDist)){
                         if dogOnlineID != "" || dogOnlineID != nil {
                             ref.child(dogOnlineID!).child("bestDistDay").setValue(dog.get(curDist))
                         }
-                        else {
+                        
                             try db!.run(dogToUpdate.update(bestDistDay <- dog.get(curDist)))
-                        }
+                        
                     }
                     if (dog.get(bestTimeDay) < dog.get(curTime)) {
                         if dogOnlineID != "" || dogOnlineID != nil {
                             ref.child(dogOnlineID!).child("bestTimeDay").setValue(dog.get(curTime))
-                        } else {
-                            try db!.run(dogToUpdate.update(bestTimeDay <- dog.get(curTime)))
                         }
+                            try db!.run(dogToUpdate.update(bestTimeDay <- dog.get(curTime)))
+                        
                     }
                     if (dog.get(bestWalks) < dog.get(curWalks)) {
                         if dogOnlineID != "" || dogOnlineID != nil {
                             ref.child(dogOnlineID!).child("bestWalks").setValue(dog.get(self.curWalks))
-                        } else {
-                            try db!.run(dogToUpdate.update(bestWalks <- dog.get(curWalks)))
                         }
+                            try db!.run(dogToUpdate.update(bestWalks <- dog.get(curWalks)))
+                        
                     }
                     var curStreak = dog.get(streak)
                     if (dog.get(timeGoal) > dog.get(curTime) || dog.get(distGoal) > dog.get(curDist) || dog.get(walksGoal) > dog.get(curWalks)){
                         curStreak = 0
                         if dogOnlineID != "" || dogOnlineID != nil {
                             ref.child(dogOnlineID!).child("streak").setValue(0)
-                        } else {
-                            try db!.run(dogToUpdate.update(streak <- 0))
                         }
+                            try db!.run(dogToUpdate.update(streak <- 0))
+                        
                     }
                     maxStreak = max(maxStreak, Int(curStreak))
                     if dogOnlineID != "" || dogOnlineID != nil {
@@ -543,22 +544,21 @@ public class SQLHelper {
                         ref.child(dogOnlineID!).child("totalWalks").setValue(totalWalks)
                         ref.child(dogOnlineID!).child("totalTime").setValue(totalTimes)
                         ref.child(dogOnlineID!).child("totalDist").setValue(totalDist)
-                        ref.child(dogOnlineID!).child("lastDaySynced").setValue(now.timeIntervalSince1970.roundTo(places: 0))
+                        ref.child(dogOnlineID!).child("lastDaySynced").setValue(now.timeIntervalSince1970.roundTo(places: 0) * 1000)
                         ref.child(dogOnlineID!).child("numWalks").setValue(0)
                         ref.child(dogOnlineID!).child("curentDistance").setValue(0)
                         ref.child(dogOnlineID!).child("walkTime").setValue(0)
                     }
-                    else {
+                    
                         try db!.run(dogToUpdate.update(totDays <- totalDays))
                         try db!.run(dogToUpdate.update(totWalks <- totalWalks))
                         try db!.run(dogToUpdate.update(totTime <- totalTimes))
                         try db!.run(dogToUpdate.update(totDist <- totalDist))
-                        try db!.run(dogToUpdate.update(lastDaySync <- now.timeIntervalSince1970.roundTo(places: 0)))
+                        try db!.run(dogToUpdate.update(lastDaySync <- now.timeIntervalSince1970.roundTo(places: 0) * 1000))
                         try db!.run(dogToUpdate.update(curWalks <- 0))
                         try db!.run(dogToUpdate.update(curDist <- 0))
                         try db!.run(dogToUpdate.update(curTime <- 0))
-                        
-                    }
+                     
                     
                 }
             }

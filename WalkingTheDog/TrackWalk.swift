@@ -35,11 +35,13 @@ class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, C
     var cellArray = SQLHelper.sharedInstance.allDogsOnWalk()
     let allDogsArray = SQLHelper.sharedInstance.allDogs()
     var walkTimer = Timer()
-    var totalSeconds = 0
+    var totalSeconds = 0.0
     let identifier = "WalkingTheDogNotification"
     let center = UNUserNotificationCenter.current()
     
     var mUserSettings: UserWalkingTheDogSettings?
+    
+    let startTime = Date()
     
     
     var filePath: String{
@@ -81,17 +83,19 @@ class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, C
     }
     
     func updateTimer(){
-        totalSeconds += 1
-        let mins = totalSeconds / 60
+        let now = Date()
+        totalSeconds = now.timeIntervalSince(startTime)
+        print("Time: \(totalSeconds)")
+        let mins = (totalSeconds / 60).rounded(.down)
         var curSecs = totalSeconds
         if mins > 0 {
             curSecs = curSecs - (mins * 60)
         }
-        var time = "\(curSecs)"
+        var time = "\(Int (curSecs))"
         if curSecs < 10 {
-            time = "0\(curSecs)"
+            time = "0\(Int (curSecs))"
         }
-        timeValue.text = "\(mins):\(time)"
+        timeValue.text = "\(Int (mins)):\(time)"
     }
     
     

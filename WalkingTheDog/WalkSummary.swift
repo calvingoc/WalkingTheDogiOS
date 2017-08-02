@@ -31,7 +31,7 @@ class WalkSummary: UIViewController, UITableViewDelegate, UITableViewDataSource 
         distLabel.text = "You went \(walkDist) miles!"
         var mph = (mUserSettings?.lastWalkDist)! / (mUserSettings?.lastWalkTime)!
         mph = mph.roundTo(places: 2)
-        mphLabel.text = "that is \(mph) mph!"
+        mphLabel.text = "That is \(mph) mph!"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

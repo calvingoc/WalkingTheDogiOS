@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let today = Date()
             if Calendar(identifier: Calendar.Identifier.gregorian).startOfDay(for: today) != Calendar(identifier: Calendar.Identifier.gregorian).startOfDay(for: userSettings.lastTimeSynced){
                 SQLHelper.sharedInstance.resetDogs(ref: ref)
+                userSettings.lastTimeSynced = today
             }
         }
         let center = UNUserNotificationCenter.current()

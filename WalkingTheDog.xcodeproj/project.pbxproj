@@ -665,6 +665,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = CKT72NR3AB;
 				INFOPLIST_FILE = WalkingTheDog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cagocapps.online.WalkingTheDog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -682,6 +683,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = CKT72NR3AB;
 				INFOPLIST_FILE = WalkingTheDog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cagocapps.online.WalkingTheDog;
 				PRODUCT_NAME = "$(TARGET_NAME)";

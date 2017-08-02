@@ -1155,7 +1155,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADw-ka-UEZ">
-                                                    <rect key="frame" x="208" y="8" width="80" height="33.5"/>
+                                                    <rect key="frame" x="198" y="8" width="80" height="33.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="pbX-Tt-gtU"/>
                                                     </constraints>
@@ -1163,8 +1163,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CiK-c4-yzy">
-                                                    <rect key="frame" x="292" y="8" width="43" height="33.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CiK-c4-yzy">
+                                                    <rect key="frame" x="282" y="8" width="53" height="33.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1178,7 +1178,7 @@
                                                 <constraint firstItem="0DD-ea-hQ3" firstAttribute="leading" secondItem="M3d-vc-LzC" secondAttribute="leading" id="X5C-kF-W08"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="kwx-7D-udK" secondAttribute="bottom" id="Y9C-BC-c07"/>
                                                 <constraint firstItem="CiK-c4-yzy" firstAttribute="leading" secondItem="ADw-ka-UEZ" secondAttribute="trailing" constant="4" id="cKB-vH-D3n"/>
-                                                <constraint firstItem="ADw-ka-UEZ" firstAttribute="leading" secondItem="eMK-dc-TM4" secondAttribute="trailing" constant="25" id="cOF-RE-UF8"/>
+                                                <constraint firstItem="ADw-ka-UEZ" firstAttribute="leading" secondItem="eMK-dc-TM4" secondAttribute="trailing" constant="15" id="cOF-RE-UF8"/>
                                                 <constraint firstItem="eMK-dc-TM4" firstAttribute="leading" secondItem="kwx-7D-udK" secondAttribute="trailing" constant="4" id="eQh-DF-zOQ"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="CiK-c4-yzy" secondAttribute="bottom" id="iNb-Uf-RRc"/>
                                                 <constraint firstItem="kwx-7D-udK" firstAttribute="leading" secondItem="0DD-ea-hQ3" secondAttribute="trailing" constant="4" id="iNz-Id-5oP"/>
