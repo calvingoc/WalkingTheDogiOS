@@ -201,7 +201,7 @@ class TrackWalk: UIViewController, UITableViewDelegate, UITableViewDataSource, C
             }
             cell.time.text = "\(hours):" + minutesString + secondsString
             cell.walks.text = "\(Int(walksVal))"
-            cell.miles.text = "\(milesVal)"
+            cell.miles.text = "\(milesVal.roundTo(places: 2))"
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "dogCell", for: indexPath) as! AllDogsCell

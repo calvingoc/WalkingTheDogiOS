@@ -115,7 +115,7 @@ class AddEditDog: UIViewController, UINavigationControllerDelegate, UIImagePicke
     @IBAction func takePicture(_ sender: UIButton){
         let imagePicker = UIImagePickerController()
         if UIImagePickerController.isSourceTypeAvailable(.camera){
-            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.sourceType = .camera
         } else {
             imagePicker.sourceType = .savedPhotosAlbum
         }
@@ -126,7 +126,7 @@ class AddEditDog: UIViewController, UINavigationControllerDelegate, UIImagePicke
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        dogPicture.image = image
+        dogPicture.image = UIImage(cgImage: image.cgImage!, scale: CGFloat(1.0), orientation: .right)
         dismiss(animated: true, completion: nil)
     }
     
@@ -207,6 +207,9 @@ class AddEditDog: UIViewController, UINavigationControllerDelegate, UIImagePicke
             if (onWalkToggle.isOn && !dogOnWalk){
                 mUserSettings.dogsOnWalk = mUserSettings.dogsOnWalk + "," + "\(String(describing: mUserSettings.currentDog))"
                 mUserSettings.defDogsOnWalk = mUserSettings.dogsOnWalk
+            }
+            if (!onWalkToggle.isOn && dogOnWalk){
+                mUserSettings.dogsOnWalk = mUserSettings.dogsOnWalk.replacingOccurrences(of: ",\(mUserSettings.currentDog)", with: "")
             }
             NSKeyedArchiver.archiveRootObject(mUserSettings, toFile: filePath)
             

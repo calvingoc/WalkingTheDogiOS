@@ -351,7 +351,7 @@
                                     <view contentMode="scaleToFill" restorationIdentifier="ContentView" translatesAutoresizingMaskIntoConstraints="NO" id="9qJ-7x-SOH" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1269"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stockdog" translatesAutoresizingMaskIntoConstraints="NO" id="g9x-2F-sbL">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stockdog" translatesAutoresizingMaskIntoConstraints="NO" id="g9x-2F-sbL">
                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="fCG-So-z20"/>
@@ -776,7 +776,7 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <size key="titleShadowOffset" width="0.0" height="3"/>
-                                                <state key="normal" title="Edit Goals">
+                                                <state key="normal" title="Edit Profile">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>

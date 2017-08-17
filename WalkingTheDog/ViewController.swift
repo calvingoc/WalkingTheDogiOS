@@ -132,8 +132,8 @@ class ViewController: UIViewController, GADBannerViewDelegate {
             let dogRow = SQLHelper.sharedInstance.findDog(dogID: (mUserSettings!.currentDog))
             dogName.text = (dogRow?.get(SQLHelper.sharedInstance.dogName))! + "'s Progress"
             if (dogRow?.get(SQLHelper.sharedInstance.picPath) != "default"){
-                dogPicture.image = ImageStore().loadImage(key: "WalkingTheDog\(String(mUserSettings!.currentDog))")
-                //dogPicture.transform = dogPicture.transform.rotated(by: CGFloat(Double.pi/2 + Double.pi))
+                //dogPicture.image = ImageStore().loadImage(key: "WalkingTheDog\(String(mUserSettings!.currentDog))")
+                dogPicture.image = UIImage(cgImage: ImageStore().loadImage(key: "WalkingTheDog\(String(mUserSettings!.currentDog))").cgImage!, scale: CGFloat(1.0), orientation: .right)
             }
             print ("imageKey 3 WalkingTheDog\(String(mUserSettings!.currentDog))")
             var hours = Int(dogRow!.get(SQLHelper.sharedInstance.curTime) / 60)
@@ -226,7 +226,7 @@ class ViewController: UIViewController, GADBannerViewDelegate {
                 let distDay = (dogRow!.get(SQLHelper.sharedInstance.totDist) / dogRow!.get(SQLHelper.sharedInstance.totDays)).roundTo(places: 2)
                 aveMilesDay.text = "\(distDay)"
                 let walksDay = dogRow!.get(SQLHelper.sharedInstance.totWalks) / dogRow!.get(SQLHelper.sharedInstance.totDays)
-                aveWalksDay.text = "\(walksDay)"
+                aveWalksDay.text = "\(walksDay.roundTo(places: 2))"
                 
             } else {
                 aveTimeDay.text = "0"
