@@ -330,6 +330,7 @@
                                     <constraint firstAttribute="height" constant="50" id="fBo-ev-qAi"/>
                                     <constraint firstAttribute="width" constant="50" id="sOb-OO-Q9O"/>
                                 </constraints>
+                                <color key="tintColor" red="0.94990867379999999" green="0.28448718789999999" blue="0.52766925099999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="paw"/>
                                 <connections>
                                     <segue destination="x3k-rq-G7H" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="XwN-qc-Cac"/>

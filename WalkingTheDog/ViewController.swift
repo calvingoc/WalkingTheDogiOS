@@ -132,8 +132,8 @@ class ViewController: UIViewController, GADBannerViewDelegate {
             let dogRow = SQLHelper.sharedInstance.findDog(dogID: (mUserSettings!.currentDog))
             dogName.text = (dogRow?.get(SQLHelper.sharedInstance.dogName))! + "'s Progress"
             if (dogRow?.get(SQLHelper.sharedInstance.picPath) != "default"){
-                //dogPicture.image = ImageStore().loadImage(key: "WalkingTheDog\(String(mUserSettings!.currentDog))")
-                dogPicture.image = UIImage(cgImage: ImageStore().loadImage(key: "WalkingTheDog\(String(mUserSettings!.currentDog))").cgImage!, scale: CGFloat(1.0), orientation: .right)
+                dogPicture.image = ImageStore().loadImage(key: "WalkingTheDog\(String(mUserSettings!.currentDog))")
+
             }
             print ("imageKey 3 WalkingTheDog\(String(mUserSettings!.currentDog))")
             var hours = Int(dogRow!.get(SQLHelper.sharedInstance.curTime) / 60)
